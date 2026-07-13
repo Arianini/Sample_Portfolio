@@ -1,0 +1,107 @@
+{{!-- views/about.hbs --}}
+<section id="about">
+  <div class="about-wrapper">
+
+    <div class="about-hero">
+      <p class="section-eyebrow">Fig. 03 &mdash; About</p>
+      <h1 class="about-name">{{name}}</h1>
+      <h2 class="about-title">{{role}}</h2>
+      <p class="about-summary">{{bioSummary}}</p>
+    </div>
+
+    <div class="about-tabs" role="tablist">
+      <button class="tab-btn active" data-tab="experience" role="tab" aria-selected="true">Experience</button>
+      <button class="tab-btn" data-tab="education" role="tab" aria-selected="false">Education</button>
+      <button class="tab-btn" data-tab="skills" role="tab" aria-selected="false">Skills</button>
+      <button class="tab-btn" data-tab="contact" role="tab" aria-selected="false">Contact</button>
+    </div>
+
+    <div id="experience" class="tab-content active">
+      <div class="timeline">
+        {{#each experience}}
+        <div class="timeline-item {{#if @first}}active{{/if}}">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">{{period}}</div>
+            <h3 class="timeline-title">{{title}}</h3>
+            <h4 class="timeline-role">{{company}}</h4>
+            <ul class="timeline-points">
+              {{#each points}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div id="education" class="tab-content">
+      <div class="timeline">
+        {{#each education}}
+        <div class="timeline-item active">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">{{period}}</div>
+            <h3 class="timeline-title">{{school}}</h3>
+            <h4 class="timeline-role">{{degree}}</h4>
+            {{#if description}}<p class="timeline-desc">{{description}}</p>{{/if}}
+            {{#if honors}}
+              <div class="achievement-badge"><i class="fas fa-trophy"></i> {{honors}}</div>
+            {{/if}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div id="skills" class="tab-content">
+      <div class="skills-grid">
+        {{#if skills.technical}}
+        <div class="skill-category">
+          <h3><i class="fas fa-terminal"></i> Technical</h3>
+          <div class="skill-tags">
+            {{#each skills.technical}}<span class="skill-tag">{{this}}</span>{{/each}}
+          </div>
+        </div>
+        {{/if}}
+        {{#if skills.analysis}}
+        <div class="skill-category">
+          <h3><i class="fas fa-chart-line"></i> Analysis</h3>
+          <div class="skill-tags">
+            {{#each skills.analysis}}<span class="skill-tag">{{this}}</span>{{/each}}
+          </div>
+        </div>
+        {{/if}}
+        {{#if skills.visualization}}
+        <div class="skill-category">
+          <h3><i class="fas fa-chart-column"></i> Visualization</h3>
+          <div class="skill-tags">
+            {{#each skills.visualization}}<span class="skill-tag">{{this}}</span>{{/each}}
+          </div>
+        </div>
+        {{/if}}
+        {{#if skills.soft}}
+        <div class="skill-category">
+          <h3><i class="fas fa-users"></i> Soft Skills</h3>
+          <div class="skill-tags">
+            {{#each skills.soft}}<span class="skill-tag">{{this}}</span>{{/each}}
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+
+    <div id="contact" class="tab-content">
+      <div class="contact-grid">
+        {{#each socials}}
+          <a href="{{url}}" class="contact-card" target="_blank" rel="noopener">
+            <i class="{{icon}}"></i>
+            <span>{{url}}</span>
+          </a>
+        {{/each}}
+      </div>
+    </div>
+
+  </div>
+</section>

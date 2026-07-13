@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{name}} — Portfolio</title>
+  <meta name="description" content="Portfolio of {{name}}, Statistics graduate." />
+
+  <!-- FontAwesome (served locally at /assets/css/all.min.css) -->
+  <link rel="stylesheet" href="/assets/css/all.min.css" />
+
+  <!-- Type system: Space Grotesk (display) / IBM Plex Sans (body) / IBM Plex Mono (data & labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a class="brand" href="/">KRGL<span class="brand-dot">.</span></a>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Toggle color theme">
+        <i class="fas fa-circle-half-stroke"></i>
+      </button>
+    </nav>
+  </header>
+
+  {{{body}}}
+
+  <footer class="site-footer">
+    <span class="footer-mono">© {{year}} {{name}}</span>
+    <span class="footer-mono footer-fig">fig. built with care</span>
+  </footer>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/hero.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
