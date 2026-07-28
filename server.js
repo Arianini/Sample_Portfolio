@@ -37,10 +37,6 @@ const role = 'Statistics Graduate';
 // Shown letter-by-letter under the hero title. Keep it short — one line.
 const tagline = 'Finding the signal in the noise.';
 
-// Downloadable résumé. The PDF lives in /public/resume/ and is served at this
-// path. Replace the file to update it; the "Résumé" button links here.
-const resumeUrl = '/resume/Krizchel-Lachica-Resume.pdf';
-
 // One-paragraph intro shown at the top of the About page.
 const bioSummary =
   'Statistics graduate from the University of the Philippines Diliman, eager to ' +
@@ -176,7 +172,7 @@ const projects = [
 // Routes
 // ===========================================================================
 app.get('/', (req, res) => {
-  res.render('home', { name, role, tagline, resumeUrl, socials, year: new Date().getFullYear() });
+  res.render('home', { name, role, tagline, socials, year: new Date().getFullYear() });
 });
 
 app.get('/projects', (req, res) => {
@@ -188,7 +184,6 @@ app.get('/about', (req, res) => {
     name,
     role,
     bioSummary,
-    resumeUrl,
     education,
     experience,
     skills,
