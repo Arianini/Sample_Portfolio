@@ -23,7 +23,7 @@ app.use('/assets',
   express.static(path.join(__dirname, 'node_modules', '@fortawesome', 'fontawesome-free'))
 );
 
-// Serve /public (css, js, images)
+// Serve /public (css, js, images, resume)
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ===========================================================================
@@ -37,17 +37,26 @@ const role = 'Statistics Graduate';
 // Shown letter-by-letter under the hero title. Keep it short — one line.
 const tagline = 'Finding the signal in the noise.';
 
+// Downloadable résumé. The PDF lives in /public/resume/ and is served at this
+// path. Replace the file to update it; the "Résumé" button links here.
+const resumeUrl = '/resume/Krizchel-Lachica-Resume.pdf';
+
 // One-paragraph intro shown at the top of the About page.
 const bioSummary =
-  'Statistics graduate with a strong foundation in data analysis, statistical ' +
-  'modeling, and turning raw numbers into clear, decision-ready insight. ' +
-  '[Replace this paragraph with 2-3 sentences about your interests, the kind ' +
-  'of problems you like solving, and what you\'re looking for next.]';
+  'Statistics graduate from the University of the Philippines Diliman, eager to ' +
+  'apply quantitative and analytical skills in a data-driven professional ' +
+  'environment. I bring strong research, data analysis, and documentation ' +
+  'experience, with the ability to synthesize complex information into clear, ' +
+  'actionable insights — backed by a demonstrated commitment to accuracy, ' +
+  'compliance, and continuous learning.';
 
+// Each social needs an `icon`, the `url` it links to, and a `label` (the clean
+// text shown on the Contact tab, so visitors don't see "mailto:" / "tel:").
 const socials = [
-  { icon: 'fab fa-github', url: 'https://github.com/your-username' },
-  { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/your-username' },
-  { icon: 'fas fa-envelope', url: 'mailto:your.email@example.com' }
+  { icon: 'fab fa-linkedin', url: 'https://linkedin.com/in/krizchel-lachica/', label: 'linkedin.com/in/krizchel-lachica' },
+  { icon: 'fas fa-envelope', url: 'mailto:krizchellachica@gmail.com', label: 'krizchellachica@gmail.com' },
+  { icon: 'fas fa-phone', url: 'tel:+639569918363', label: '+63 956-991-8363' },
+  { icon: 'fas fa-location-dot', url: 'https://maps.google.com/?q=Marikina+City+Philippines', label: 'Marikina City, Philippines' }
 ];
 
 // ---------------------------------------------------------------------------
@@ -57,12 +66,20 @@ const education = [
   {
     school: 'University of the Philippines Diliman',
     degree: 'Bachelor of Science in Statistics',
-    period: '[20XX - 20XX]',
+    period: 'Sep 2022 – Jul 2026',
     description:
-      'Coursework in [Probability & Statistical Inference, Regression Analysis, ' +
-      'Sampling Theory, Data Mining, Statistical Computing — edit to match your ' +
-      'actual courses].',
-    honors: '' // e.g. "Cum Laude" or "Dean's Lister" — leave blank to hide
+      'Relevant coursework: Statistical Theory, Regression Analysis, ' +
+      'Multivariate Methods, and Machine Learning.',
+    honors: '' // no honors listed — leave blank to hide the badge
+  },
+  {
+    school: 'St. Scholastica\'s Academy of Marikina',
+    degree: 'Accountancy, Business Management (ABM) Strand',
+    period: 'Sep 2020 – Jul 2022',
+    description:
+      'First Place — "Return on Invest 2021: Conquer Your Tomorrow" ' +
+      'business case competition.',
+    honors: 'Outstanding Academic Strand Awardee, S.Y. 2021–2022'
   }
 ];
 
@@ -72,68 +89,86 @@ const education = [
 // ---------------------------------------------------------------------------
 const experience = [
   {
-    title: '[Your Role / Job Title]',
-    company: '[Company or Organization Name]',
-    period: '[Mon 20XX - Mon 20XX]',
+    title: 'Vice President for Finance and Sales',
+    company: 'AIESEC in UP Diliman · Talent Management Department',
+    period: 'Jul 2025 – Jan 2026',
     points: [
-      '[Describe a key responsibility or dataset you worked with]',
-      '[Describe a tool, method, or analysis you contributed]',
-      '[Describe an outcome or result, with a number if you have one]'
+      'Managed end-to-end event budgeting, tracking revenue and expenses across multiple streams.',
+      'Developed sales strategies and tracked outcomes against revenue targets.',
+      'Negotiated sponsor contracts, ensuring risk mitigation and organizational policy compliance.'
     ]
   },
   {
-    title: '[Another Role]',
-    company: '[Company or Organization Name]',
-    period: '[Mon 20XX - Mon 20XX]',
+    title: 'Team Member — STATeach Programs',
+    company: 'UP Statistical Society · Personnel Committee Subcommittee',
+    period: 'Aug 2025 – Dec 2025',
     points: [
-      '[Describe what you did in this role]',
-      '[Add a second bullet if useful]'
+      'Developed data-informed presentations that communicated statistical concepts to non-technical audiences.',
+      'Coordinated the program across multiple stakeholder groups, ensuring consistent follow-through on deliverables within set timelines.'
+    ]
+  },
+  {
+    title: 'Director for Internal Controls — Auditing',
+    company: 'AIESEC in UP Diliman · Finance and Legalities Administration',
+    period: 'Feb 2024 – Jan 2025',
+    points: [
+      'Developed and implemented internal audit procedures to ensure compliance with organizational policies.',
+      'Conducted regular audits of financial records, contracts, and operational processes, identifying and flagging discrepancies.',
+      'Prepared audit reports and presented findings and recommendations to internal teams and senior leadership.'
+    ]
+  },
+  {
+    title: 'Team Member — Projects and Documentation',
+    company: 'UP Statistical Society · Internal Committee Subcommittee',
+    period: 'Sep 2024 – Dec 2024',
+    points: [
+      'Maintained systematic records of organizational initiatives, reviewing outputs for completeness and consistency before submission.',
+      'Authored structured reports and articles, shaping them into clear, concise narratives for diverse audiences.'
     ]
   }
 ];
 
 // ---------------------------------------------------------------------------
-// Skills — About page "Skills" tab. Trim this down to what's actually true.
+// Skills — About page "Skills" tab.
 // ---------------------------------------------------------------------------
 const skills = {
-  technical: ['R', 'Python', 'SQL', 'Excel / Google Sheets', 'SPSS'],
-  analysis: ['Statistical Modeling', 'Hypothesis Testing', 'Regression Analysis', 'A/B Testing', 'Data Cleaning'],
-  visualization: ['Tableau', 'Power BI', 'ggplot2', 'matplotlib / seaborn'],
-  soft: ['Analytical Thinking', 'Technical Writing', 'Collaboration', 'Attention to Detail']
+  technical: ['R / RStudio', 'SAS', 'SQL (upskilling)', 'Python (upskilling)', 'Microsoft Excel', 'Google Workspace'],
+  analysis: ['Statistical Modeling', 'Regression Analysis', 'Multivariate Methods', 'Machine Learning', 'Data Analysis', 'Financial Auditing'],
+  visualization: ['Canva', 'Microsoft PowerPoint', 'Data-Informed Presentations'],
+  soft: ['Research Writing', 'Leadership', 'Stakeholder Coordination', 'Attention to Detail', 'English & Filipino']
 };
 
 // ---------------------------------------------------------------------------
-// Projects — Projects page. Each is marked `sample: true` so the site is
-// upfront about placeholder content; set to false (or remove the field)
-// once you replace it with a real project.
+// Projects — Projects page. These are drawn from selected academic research
+// projects. Add a `github` or `live` URL to any entry to show its link button.
 // ---------------------------------------------------------------------------
 const projects = [
   {
-    title: 'Sample Project — Exploratory Data Analysis',
+    title: 'DPWH Infrastructure Project Delays',
     description:
-      '[Replace with a real project. Describe the dataset, the question you ' +
-      'were answering, your approach, and one concrete finding.]',
-    sample: true,
-    github: 'https://github.com/your-username',
-    tools: ['R', 'ggplot2', 'Statistics']
+      'Modeled the drivers of on-time completion for DPWH infrastructure ' +
+      'projects, using logistic regression and decision-tree modeling in R to ' +
+      'identify which project characteristics best predicted delay.',
+    sample: false,
+    tools: ['R', 'Logistic Regression', 'Decision Trees']
   },
   {
-    title: 'Sample Project — Predictive Model',
+    title: 'Determinants of Provincial Poverty in the Philippines',
     description:
-      '[Replace with a real project. What did you predict, what model did you ' +
-      'use, and how did you evaluate it?]',
-    sample: true,
-    github: 'https://github.com/your-username',
-    tools: ['Python', 'Regression', 'pandas']
+      'Examined province-level determinants of poverty across the Philippines ' +
+      'with ordinal logistic regression, ranking the socioeconomic factors ' +
+      'most associated with poverty severity.',
+    sample: false,
+    tools: ['R', 'Ordinal Logistic Regression']
   },
   {
-    title: 'Sample Project — Dashboard / Report',
+    title: 'Unsupervised Learning on the Ames Housing Dataset',
     description:
-      '[Replace with a real project. What decision did this dashboard or ' +
-      'report support, and who was it for?]',
-    sample: true,
-    github: 'https://github.com/your-username',
-    tools: ['Tableau', 'SQL', 'Data Viz']
+      'Applied principal component analysis and K-means clustering to the Ames ' +
+      'Housing dataset to reduce dimensionality and surface natural groupings ' +
+      'of homes by their underlying characteristics.',
+    sample: false,
+    tools: ['R', 'PCA', 'K-means Clustering']
   }
 ];
 
@@ -141,7 +176,7 @@ const projects = [
 // Routes
 // ===========================================================================
 app.get('/', (req, res) => {
-  res.render('home', { name, role, tagline, socials, year: new Date().getFullYear() });
+  res.render('home', { name, role, tagline, resumeUrl, socials, year: new Date().getFullYear() });
 });
 
 app.get('/projects', (req, res) => {
@@ -153,6 +188,7 @@ app.get('/about', (req, res) => {
     name,
     role,
     bioSummary,
+    resumeUrl,
     education,
     experience,
     skills,
