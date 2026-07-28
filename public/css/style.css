@@ -221,23 +221,7 @@ img { max-width: 100%; display: block; }
 
 @keyframes blink { 50% { opacity: 0; } }
 
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--teal);
-}
-.btn-ghost:hover {
-  background: var(--teal);
-  color: #04140f;
-}
-.btn-ghost i { margin-right: 0.4rem; }
+.hero-actions { margin-bottom: 2rem; }
 
 .btn {
   display: inline-block;
